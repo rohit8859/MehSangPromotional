@@ -1,0 +1,168 @@
+export default function Footer() {
+  const quickLinks = ['Home','About','Services','Gallery','Reviews','Pricing','Contact'];
+  const svcLinks = ['Bridal Mehndi','Engagement Mehndi','Wedding Guest Mehndi','Festival Mehndi','Arabic Mehndi','Custom Designs'];
+
+  return (
+    <footer style={{ background:'var(--brown)', color:'#fff', padding:'80px 0 30px', borderTop:'3px solid var(--gold)' }}>
+      <div className="container">
+        <div style={{ display:'grid', gridTemplateColumns:'1.5fr 1fr 1fr 1fr', gap:40, marginBottom:50 }} className="footer-grid-resp">
+
+          {/* Brand */}
+          <div>
+            <a href="#home" style={{ display:'flex', alignItems:'center', gap:10, textDecoration:'none' }}>
+              <div style={{ width:40,height:40,borderRadius:'50%',background:'radial-gradient(circle,var(--gold),var(--brown))',display:'flex',alignItems:'center',justifyContent:'center' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 16.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 1 1 0 9ZM12 2v4.5M12 17.5V22M4.93 4.93l3.18 3.18M15.89 15.89l3.18 3.18M2 12h4.5M17.5 12H22M19.07 4.93l-3.18 3.18M8.11 15.89l-3.18 3.18"/></svg>
+              </div>
+              <span style={{ fontFamily:'Playfair Display,serif', fontSize:'1.8rem', fontWeight:800, color:'#fff', letterSpacing:1 }}>MehSang</span>
+            </a>
+            <p style={{ color:'var(--beige)', marginTop:15, fontSize:'0.9rem', lineHeight:1.7 }}>
+              Dedicated to creating memorable mehndi experiences through chemical-free organic henna and beautiful, intricate designs.
+            </p>
+            <div style={{ display:'flex', gap:12, marginTop:15 }}>
+              {/* {['📸','📘','🐦'].map((ic,i) => (
+                <a key={i} href="#" className="social-circle" style={{ fontSize:'0.9rem' }}>{ic}</a>
+              ))} */}
+            </div>
+          </div>
+
+          {/* Quick links */}
+          <div>
+            <h4 style={{ color:'var(--gold)', fontSize:'1.1rem', fontFamily:'Playfair Display,serif', marginBottom:24, position:'relative', paddingBottom:8 }}>
+              Quick Links
+              <span style={{ position:'absolute', bottom:0, left:0, width:30, height:2, background:'var(--gold)', display:'block' }} />
+            </h4>
+            <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+              {quickLinks.map(l => (
+                <a key={l} href={`#${l.toLowerCase()}`} style={{ color:'var(--beige)', fontSize:'0.9rem', textDecoration:'none', transition:'all 0.2s' }}
+                  onMouseEnter={e => { e.target.style.color='var(--gold)'; e.target.style.paddingLeft='5px'; }}
+                  onMouseLeave={e => { e.target.style.color='var(--beige)'; e.target.style.paddingLeft='0'; }}>{l}</a>
+              ))}
+            </div>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 style={{ color:'var(--gold)', fontSize:'1.1rem', fontFamily:'Playfair Display,serif', marginBottom:24, position:'relative', paddingBottom:8 }}>
+              Services
+              <span style={{ position:'absolute', bottom:0, left:0, width:30, height:2, background:'var(--gold)', display:'block' }} />
+            </h4>
+            <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+              {svcLinks.map(l => (
+                <a key={l} href="#services" style={{ color:'var(--beige)', fontSize:'0.9rem', textDecoration:'none', transition:'all 0.2s' }}
+                  onMouseEnter={e => { e.target.style.color='var(--gold)'; e.target.style.paddingLeft='5px'; }}
+                  onMouseLeave={e => { e.target.style.color='var(--beige)'; e.target.style.paddingLeft='0'; }}>{l}</a>
+              ))}
+            </div>
+          </div>
+
+          {/* Hours */}
+          <div>
+            <h4 style={{ color:'var(--gold)', fontSize:'1.1rem', fontFamily:'Playfair Display,serif', marginBottom:24, position:'relative', paddingBottom:8 }}>
+              Working Hours
+              <span style={{ position:'absolute', bottom:0, left:0, width:30, height:2, background:'var(--gold)', display:'block' }} />
+            </h4>
+            <div style={{ display:'flex', flexDirection:'column', gap:8, color:'var(--beige)', fontSize:'0.9rem' }}>
+              <p>Mon - Fri: 9:00 AM - 8:00 PM</p>
+              <p>Sat - Sun: 8:00 AM - 9:00 PM</p>
+              <p style={{ marginTop:10, color:'var(--gold)', fontWeight:500 }}>Prior Booking Essential</p>
+            </div>
+          </div>
+        </div>
+
+        <div style={{ borderTop:'1px solid rgba(255,255,255,0.08)', paddingTop:30, display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:15 }}>
+          <p style={{ fontSize:'0.85rem', color:'var(--beige-dark)' }}>© 2026 MehSang. All Rights Reserved.</p>
+          <p style={{ fontSize:'0.85rem', color:'var(--beige-dark)' }}>Designed with Love for Premium Artistry</p>
+        </div>
+      </div>
+      <style>{`
+        .footer-grid-resp { grid-template-columns:1.5fr 1fr 1fr 1fr; }
+        @media(max-width:768px){ .footer-grid-resp { grid-template-columns:1fr 1fr !important; } }
+        @media(max-width:480px){ .footer-grid-resp { grid-template-columns:1fr !important; } }
+      `}</style>
+    </footer>
+  );
+}
+
+
+// import { FaWhatsapp } from "react-icons/fa";
+
+// export default function Footer() {
+//   const quickLinks = ['Home','About','Services','Gallery','Reviews','Pricing','Contact'];
+//   const svcLinks = ['Bridal Mehndi','Engagement Mehndi','Wedding Guest Mehndi','Festival Mehndi','Arabic Mehndi','Custom Designs'];
+
+//   return (
+//     <footer style={{ background:'var(--brown)', color:'#fff', padding:'80px 0 30px', borderTop:'3px solid var(--gold)' }}>
+//       <div className="container">
+//         <div style={{ display:'grid', gridTemplateColumns:'1.5fr 1fr 1fr 1fr', gap:40, marginBottom:50 }} className="footer-grid-resp">
+
+//           {/* WhatsApp Only */}
+//           <div>
+//             <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer"
+//                style={{ display:'flex', alignItems:'center', gap:10, textDecoration:'none' }}>
+//               <FaWhatsapp size={40} color="#25D366" />
+//               <span style={{ fontFamily:'Playfair Display,serif', fontSize:'1.2rem', fontWeight:600, color:'#fff' }}>
+//                 WhatsApp
+//               </span>
+//             </a>
+//             <p style={{ color:'var(--beige)', marginTop:15, fontSize:'0.9rem', lineHeight:1.7 }}>
+//               Reach us instantly on WhatsApp for bookings, inquiries, and personalized mehndi services.
+//             </p>
+//           </div>
+
+//           {/* Quick links */}
+//           <div>
+//             <h4 style={{ color:'var(--gold)', fontSize:'1.1rem', fontFamily:'Playfair Display,serif', marginBottom:24, position:'relative', paddingBottom:8 }}>
+//               Quick Links
+//               <span style={{ position:'absolute', bottom:0, left:0, width:30, height:2, background:'var(--gold)', display:'block' }} />
+//             </h4>
+//             <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+//               {quickLinks.map(l => (
+//                 <a key={l} href={`#${l.toLowerCase()}`} style={{ color:'var(--beige)', fontSize:'0.9rem', textDecoration:'none', transition:'all 0.2s' }}
+//                   onMouseEnter={e => { e.target.style.color='var(--gold)'; e.target.style.paddingLeft='5px'; }}
+//                   onMouseLeave={e => { e.target.style.color='var(--beige)'; e.target.style.paddingLeft='0'; }}>{l}</a>
+//               ))}
+//             </div>
+//           </div>
+
+//           {/* Services */}
+//           <div>
+//             <h4 style={{ color:'var(--gold)', fontSize:'1.1rem', fontFamily:'Playfair Display,serif', marginBottom:24, position:'relative', paddingBottom:8 }}>
+//               Services
+//               <span style={{ position:'absolute', bottom:0, left:0, width:30, height:2, background:'var(--gold)', display:'block' }} />
+//             </h4>
+//             <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+//               {svcLinks.map(l => (
+//                 <a key={l} href="#services" style={{ color:'var(--beige)', fontSize:'0.9rem', textDecoration:'none', transition:'all 0.2s' }}
+//                   onMouseEnter={e => { e.target.style.color='var(--gold)'; e.target.style.paddingLeft='5px'; }}
+//                   onMouseLeave={e => { e.target.style.color='var(--beige)'; e.target.style.paddingLeft='0'; }}>{l}</a>
+//               ))}
+//             </div>
+//           </div>
+
+//           {/* Hours */}
+//           <div>
+//             <h4 style={{ color:'var(--gold)', fontSize:'1.1rem', fontFamily:'Playfair Display,serif', marginBottom:24, position:'relative', paddingBottom:8 }}>
+//               Working Hours
+//               <span style={{ position:'absolute', bottom:0, left:0, width:30, height:2, background:'var(--gold)', display:'block' }} />
+//             </h4>
+//             <div style={{ display:'flex', flexDirection:'column', gap:8, color:'var(--beige)', fontSize:'0.9rem' }}>
+//               <p>Mon - Fri: 9:00 AM - 8:00 PM</p>
+//               <p>Sat - Sun: 8:00 AM - 9:00 PM</p>
+//               <p style={{ marginTop:10, color:'var(--gold)', fontWeight:500 }}>Prior Booking Essential</p>
+//             </div>
+//           </div>
+//         </div>
+
+//         <div style={{ borderTop:'1px solid rgba(255,255,255,0.08)', paddingTop:30, display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:15 }}>
+//           <p style={{ fontSize:'0.85rem', color:'var(--beige-dark)' }}>© 2026 MehSang. All Rights Reserved.</p>
+//           <p style={{ fontSize:'0.85rem', color:'var(--beige-dark)' }}>Designed with Love for Premium Artistry</p>
+//         </div>
+//       </div>
+//       <style>{`
+//         .footer-grid-resp { grid-template-columns:1.5fr 1fr 1fr 1fr; }
+//         @media(max-width:768px){ .footer-grid-resp { grid-template-columns:1fr 1fr !important; } }
+//         @media(max-width:480px){ .footer-grid-resp { grid-template-columns:1fr !important; } }
+//       `}</style>
+//     </footer>
+//   );
+// }

@@ -1,0 +1,36 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import Home from './pages/Home';
+import AdminLogin from './pages/admin/Login';
+import AdminDashboard from './pages/admin/Dashboard';
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            style: {
+              fontFamily: 'Lato, sans-serif',
+              fontSize: '14px',
+              borderRadius: '12px',
+            },
+            success: { iconTheme: { primary: '#ab1a45', secondary: '#fff' } }
+          }}
+        />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}
