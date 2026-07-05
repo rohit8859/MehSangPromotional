@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Hero() {
   return (
     <section id="home" style={{
@@ -37,17 +39,17 @@ export default function Hero() {
       </div>
 
       <div className="container" style={{ position:'relative', zIndex:3 }}>
-        <div className="animate-fadeInUp" style={{ maxWidth:750 }}>
+        <div className="animate-fadeInUp hero-content" style={{ maxWidth:750, margin: '0 auto', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <p className="section-tagline" style={{ color:'var(--gold)' }}>Exquisite Bridal Artistry</p>
           <h1 style={{ fontFamily:'Playfair Display,serif', fontSize:'clamp(2.8rem,6vw,4.5rem)', color:'#fff', lineHeight:1.15, marginBottom:'1.5rem', fontWeight:700 }}>
             Beautiful <span style={{ fontStyle:'italic', color:'var(--gold)' }}>Mehndi Art</span><br />for Every Celebration
           </h1>
-          <p style={{ fontSize:'1.15rem', color:'var(--beige)', marginBottom:'2.5rem', fontWeight:300, maxWidth:600 }}>
+          <p className="hero-desc" style={{ fontSize:'1.15rem', color:'var(--beige)', marginBottom:'2.5rem', fontWeight:300, maxWidth:600, marginLeft: 'auto', marginRight: 'auto' }}>
             Bridal Mehndi, Engagement Mehndi, Wedding Mehndi, Festival Mehndi &amp; Customized Designs Crafted with Passion and Artistic Excellence.
           </p>
-          <div style={{ display:'flex', gap:16, flexWrap:'wrap' }}>
-            <a href="#booking" className="btn btn-primary">Book Appointment</a>
-            <a href="#gallery" className="btn btn-secondary" style={{ color:'#fff', borderColor:'rgba(255,255,255,0.5)' }}>View Gallery</a>
+          <div className="hero-buttons" style={{ display:'flex', gap:16, flexWrap:'wrap', justifyContent: 'center' }}>
+            <Link to="/book" className="btn btn-primary">Book Appointment</Link>
+            <Link to="/gallery" className="btn btn-secondary" style={{ color:'#fff', borderColor:'rgba(255,255,255,0.5)' }}>View Gallery</Link>
           </div>
         </div>
       </div>

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [active, setActive] = useState('home');
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -12,14 +13,16 @@ export default function Navbar() {
   }, []);
 
   const links = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'services', label: 'Services' },
-    { id: 'gallery', label: 'Gallery' },
-    { id: 'testimonials', label: 'Reviews' },
-    { id: 'pricing', label: 'Pricing' },
-    { id: 'contact', label: 'Contact' },
+    { path: '/', label: 'Home' },
+    { path: '/services', label: 'Services' },
+    { path: '/gallery', label: 'Gallery' },
+    { path: '/about', label: 'About' },
   ];
+
+  const isActive = (path) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
+  };
 
   return (
     <>
@@ -36,7 +39,7 @@ export default function Navbar() {
       }}>
         <div className="container" style={{ display:'flex', justifyContent:'space-between', alignItems:'center', height:'100%' }}>
           {/* Logo */}
-          <a href="#home" style={{ display:'flex', alignItems:'center', gap:10 }}>
+          <Link to="/" style={{ display:'flex', alignItems:'center', gap:10 }}>
             <div style={{
               width:40, height:40, borderRadius:'50%',
               background:'radial-gradient(circle, var(--gold) 0%, var(--brown) 100%)',
@@ -49,13 +52,12 @@ export default function Navbar() {
               </svg>
             </div>
             <span style={{ fontFamily:'Playfair Display,serif', fontSize:'1.8rem', fontWeight:800, color:'var(--brown)', letterSpacing:1 }}>MehSang</span>
-          </a>
+          </Link>
 
           {/* Desktop nav */}
           <nav style={{ display:'flex', alignItems:'center', gap:32 }} className="hidden-mobile">
             {links.map(l => (
-              <a key={l.id} href={`#${l.id}`}
-                onClick={() => setActive(l.id)}
+              <Link key={l.path} to={l.path}
                 style={{
                   fontSize:'0.95rem', fontWeight:500, color:'var(--brown)',
                   position:'relative', padding:'6px 0', textDecoration:'none',
@@ -63,13 +65,13 @@ export default function Navbar() {
                 {l.label}
                 <span style={{
                   position:'absolute', bottom:0, left:0,
-                  width: active === l.id ? '100%' : '0',
+                  width: isActive(l.path) ? '100%' : '0',
                   height:2, background:'var(--gold)', borderRadius:999,
                   transition:'width 0.2s',
                 }} />
-              </a>
+              </Link>
             ))}
-            <a href="#booking" className="btn btn-primary" style={{ fontSize:'0.85rem', padding:'10px 22px' }}>Book Now</a>
+            <Link to="/book" className="btn btn-primary" style={{ fontSize:'0.85rem', padding:'10px 22px' }}>Book Now</Link>
           </nav>
 
           {/* Hamburger */}
@@ -96,13 +98,13 @@ export default function Navbar() {
           borderLeft:'1px solid var(--beige)',
         }}>
           {links.map(l => (
-            <a key={l.id} href={`#${l.id}`}
-              onClick={() => { setMenuOpen(false); setActive(l.id); }}
-              style={{ fontSize:'1.1rem', fontWeight:500, color:'var(--brown)', textDecoration:'none' }}>
+            <Link key={l.path} to={l.path}
+              onClick={() => setMenuOpen(false)}
+              style={{ fontSize:'1.1rem', fontWeight:500, color:'var(--brown)', textDecoration:'none', borderBottom: isActive(l.path) ? '1px solid var(--gold)' : 'none' }}>
               {l.label}
-            </a>
+            </Link>
           ))}
-          <a href="#booking" className="btn btn-primary" onClick={() => setMenuOpen(false)} style={{ textAlign:'center' }}>Book Now</a>
+          <Link to="/book" className="btn btn-primary" onClick={() => setMenuOpen(false)} style={{ textAlign:'center' }}>Book Now</Link>
         </div>
       </header>
 

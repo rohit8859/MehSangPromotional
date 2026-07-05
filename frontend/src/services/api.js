@@ -43,3 +43,10 @@ export const updatePricing = (id, data) => api.put(`/pricing/${id}`, data);
 export const deletePricing = (id) => api.delete(`/pricing/${id}`);
 
 export const getEmailLogs = () => api.get('/emails');
+
+// ── Gallery APIs ──────────────────────────────────────────
+export const getGallery = () => api.get('/gallery');
+export const addGalleryItem = (data) => api.post('/gallery', data);
+export const updateGalleryItem = (id, data) => api.put(`/gallery/${id}`, data);
+export const deleteGalleryItem = (id) => api.delete(`/gallery/${id}`);
+export const syncGalleryWithSheet = (sheetUrl) => api.post('/gallery/sync', { sheetUrl });

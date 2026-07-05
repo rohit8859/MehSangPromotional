@@ -1,5 +1,15 @@
+import { Link } from 'react-router-dom';
+
 export default function Footer() {
-  const quickLinks = ['Home','About','Services','Gallery','Reviews','Pricing','Contact'];
+  const quickLinks = [
+    { label: 'Home', path: '/' },
+    { label: 'About', path: '/about' },
+    { label: 'Services', path: '/services' },
+    { label: 'Gallery', path: '/gallery' },
+    { label: 'Reviews', path: '/about' },
+    { label: 'Pricing', path: '/services' },
+    { label: 'Contact', path: '/book' },
+  ];
   const svcLinks = ['Bridal Mehndi','Engagement Mehndi','Wedding Guest Mehndi','Festival Mehndi','Arabic Mehndi','Custom Designs'];
 
   return (
@@ -9,19 +19,16 @@ export default function Footer() {
 
           {/* Brand */}
           <div>
-            <a href="#home" style={{ display:'flex', alignItems:'center', gap:10, textDecoration:'none' }}>
+            <Link to="/" style={{ display:'flex', alignItems:'center', gap:10, textDecoration:'none' }}>
               <div style={{ width:40,height:40,borderRadius:'50%',background:'radial-gradient(circle,var(--gold),var(--brown))',display:'flex',alignItems:'center',justifyContent:'center' }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 16.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 1 1 0 9ZM12 2v4.5M12 17.5V22M4.93 4.93l3.18 3.18M15.89 15.89l3.18 3.18M2 12h4.5M17.5 12H22M19.07 4.93l-3.18 3.18M8.11 15.89l-3.18 3.18"/></svg>
               </div>
               <span style={{ fontFamily:'Playfair Display,serif', fontSize:'1.8rem', fontWeight:800, color:'#fff', letterSpacing:1 }}>MehSang</span>
-            </a>
+            </Link>
             <p style={{ color:'var(--beige)', marginTop:15, fontSize:'0.9rem', lineHeight:1.7 }}>
               Dedicated to creating memorable mehndi experiences through chemical-free organic henna and beautiful, intricate designs.
             </p>
             <div style={{ display:'flex', gap:12, marginTop:15 }}>
-              {/* {['📸','📘','🐦'].map((ic,i) => (
-                <a key={i} href="#" className="social-circle" style={{ fontSize:'0.9rem' }}>{ic}</a>
-              ))} */}
             </div>
           </div>
 
@@ -33,9 +40,9 @@ export default function Footer() {
             </h4>
             <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
               {quickLinks.map(l => (
-                <a key={l} href={`#${l.toLowerCase()}`} style={{ color:'var(--beige)', fontSize:'0.9rem', textDecoration:'none', transition:'all 0.2s' }}
+                <Link key={l.label} to={l.path} style={{ color:'var(--beige)', fontSize:'0.9rem', textDecoration:'none', transition:'all 0.2s' }}
                   onMouseEnter={e => { e.target.style.color='var(--gold)'; e.target.style.paddingLeft='5px'; }}
-                  onMouseLeave={e => { e.target.style.color='var(--beige)'; e.target.style.paddingLeft='0'; }}>{l}</a>
+                  onMouseLeave={e => { e.target.style.color='var(--beige)'; e.target.style.paddingLeft='0'; }}>{l.label}</Link>
               ))}
             </div>
           </div>
@@ -48,9 +55,9 @@ export default function Footer() {
             </h4>
             <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
               {svcLinks.map(l => (
-                <a key={l} href="#services" style={{ color:'var(--beige)', fontSize:'0.9rem', textDecoration:'none', transition:'all 0.2s' }}
+                <Link key={l} to="/services" style={{ color:'var(--beige)', fontSize:'0.9rem', textDecoration:'none', transition:'all 0.2s' }}
                   onMouseEnter={e => { e.target.style.color='var(--gold)'; e.target.style.paddingLeft='5px'; }}
-                  onMouseLeave={e => { e.target.style.color='var(--beige)'; e.target.style.paddingLeft='0'; }}>{l}</a>
+                  onMouseLeave={e => { e.target.style.color='var(--beige)'; e.target.style.paddingLeft='0'; }}>{l}</Link>
               ))}
             </div>
           </div>

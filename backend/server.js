@@ -31,6 +31,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/bookings', require('./routes/bookings'));
 app.use('/api/pricing', require('./routes/pricing'));
 app.use('/api/emails', require('./routes/emails'));
+app.use('/api/gallery', require('./routes/gallery'));
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'MehSang API Running ✅' }));

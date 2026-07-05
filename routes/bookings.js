@@ -3,6 +3,7 @@ const router = express.Router();
 const Booking = require('../models/Booking');
 const EmailLog = require('../models/EmailLog');
 const { hasSmtpConfig, sendMail } = require('../utils/mailer');
+const { sendWhatsapp } = require('../utils/whatsapp');
 const { protect } = require('../middleware/auth');
 
 // POST /api/bookings - Public: submit booking
@@ -71,6 +72,25 @@ router.post('/', async (req, res) => {
       await clientLog.save();
     }
 
+    // Send WhatsApp notification to Admin
+    let whatsappSent = false;
+    if (process.env.ADMIN_WHATSAPP_NUMBER) {
+      const waMessage = `🔔 *New Mehndi Booking Request!*\n\n` +
+        `👤 *Name:* ${name}\n` +
+        `📞 *Phone:* ${phone}\n` +
+        `📧 *Email:* ${email}\n` +
+        `📅 *Date:* ${new Date(eventDate).toDateString()}\n` +
+        `🎨 *Event:* ${eventType}\n` +
+        `📍 *Location:* ${location || 'To Be Finalized'}\n` +
+        `💬 *Message:* ${message || 'N/A'}`;
+      
+      const waResult = await sendWhatsapp({
+        to: process.env.ADMIN_WHATSAPP_NUMBER,
+        body: waMessage
+      });
+      whatsappSent = waResult.sent;
+    }
+
     res.status(201).json({
       message: 'Booking submitted successfully!',
       booking,
@@ -78,6 +98,7 @@ router.post('/', async (req, res) => {
         smtpEnabled: hasSmtpConfig,
         adminDelivered,
         clientDelivered,
+        whatsappSent,
       }
     });
   } catch (err) {

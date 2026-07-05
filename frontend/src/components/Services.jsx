@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const services = [
   { id:'bridal', title:'Bridal Mehndi', img:'/services/service-1.png', icon:'❤️',
@@ -92,7 +93,7 @@ export default function Services() {
             </ul>
             <div style={{ display:'flex', gap:12, justifyContent:'flex-end' }}>
               <button className="btn btn-secondary" onClick={() => setModalSvc(null)}>Close</button>
-              <a href="#booking" className="btn btn-primary" onClick={() => setModalSvc(null)}>Book This Service</a>
+              <Link to="/book" className="btn btn-primary" onClick={() => setModalSvc(null)}>Book This Service</Link>
             </div>
           </div>
         </div>

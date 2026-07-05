@@ -31,12 +31,25 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/bookings', require('./routes/bookings'));
 app.use('/api/pricing', require('./routes/pricing'));
 app.use('/api/emails', require('./routes/emails'));
+app.use('/api/gallery', require('./routes/gallery'));
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'MehSang API Running ✅' }));
 
-// 404 handler
-app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
+// Serve static assets in production
+const path = require('path');
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'frontend/dist')));
+  app.get('*', (req, res) => {
+    if (req.path.startsWith('/api')) {
+      return res.status(404).json({ message: 'API Route not found' });
+    }
+    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
+  });
+} else {
+  // 404 handler
+  app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
+}
 
 // Error handler
 app.use((err, req, res, next) => {

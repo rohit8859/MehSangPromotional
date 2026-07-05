@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getPricing } from '../services/api';
 
 export default function Pricing() {
@@ -27,18 +28,9 @@ export default function Pricing() {
         {loading ? (
           <div style={{ textAlign:'center', marginTop:50 }}><div style={{ width:40,height:40,border:'3px solid var(--beige-dark)',borderTop:'3px solid var(--gold)',borderRadius:'50%',animation:'spin 0.8s linear infinite',margin:'0 auto' }} /></div>
         ) : (
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))', gap:30, marginTop:50 }}>
+          <div className="pricing-grid">
             {pkgs.map(pkg => (
-              <div key={pkg._id} style={{
-                background:'#fff', borderRadius:24, padding:'40px 30px',
-                boxShadow:'0 10px 30px var(--shadow)',
-                border: pkg.isPopular ? '2px solid var(--gold)' : '1px solid rgba(75,46,46,0.03)',
-                textAlign:'center', display:'flex', flexDirection:'column',
-                position:'relative', transition:'all 0.4s cubic-bezier(0.25,1,0.5,1)',
-                transform: pkg.isPopular ? 'translateY(-8px)' : '',
-              }}
-                onMouseEnter={e => { if(!pkg.isPopular) e.currentTarget.style.transform='translateY(-5px)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = pkg.isPopular ? 'translateY(-8px)' : ''; }}>
+              <div key={pkg._id} className={`pricing-card${pkg.isPopular ? ' popular' : ''}`}>
                 {pkg.badge && (
                   <div style={{
                     position:'absolute', top:-15, left:'50%', transform:'translateX(-50%)',
@@ -58,9 +50,9 @@ export default function Pricing() {
                     </li>
                   ))}
                 </ul>
-                <a href="#booking" className={`btn ${pkg.isPopular ? 'btn-gold' : 'btn-primary'}`} style={{ width:'100%', justifyContent:'center' }}>
+                <Link to="/book" className={`btn ${pkg.isPopular ? 'btn-gold' : 'btn-primary'}`} style={{ width:'100%', justifyContent:'center' }}>
                   Book This Package
-                </a>
+                </Link>
               </div>
             ))}
           </div>
@@ -69,7 +61,61 @@ export default function Pricing() {
           * Travel charges may apply · Prices inclusive of all materials
         </p>
       </div>
-      <style>{`@keyframes spin { to { transform:rotate(360deg); } }`}</style>
+      <style>{`
+        @keyframes spin { to { transform:rotate(360deg); } }
+        .pricing-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 30px;
+          margin-top: 50px;
+          padding: 10px 0;
+        }
+        .pricing-card {
+          background: #fff;
+          border-radius: 24px;
+          padding: 40px 30px;
+          box-shadow: 0 10px 30px var(--shadow);
+          border: 1px solid rgba(75, 46, 46, 0.03);
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .pricing-card:hover {
+          transform: translateY(-5px);
+        }
+        .pricing-card.popular {
+          border: 2px solid var(--gold);
+          transform: translateY(-8px);
+        }
+        .pricing-card.popular:hover {
+          transform: translateY(-10px);
+        }
+        
+        @media(max-width:768px) {
+          .pricing-grid {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            padding: 20px 24px;
+            margin: 30px -24px 0 -24px;
+            scroll-padding: 24px;
+            scrollbar-width: none;
+          }
+          .pricing-grid::-webkit-scrollbar {
+            display: none;
+          }
+          .pricing-card {
+            flex: 0 0 290px;
+            scroll-snap-align: start;
+          }
+          .pricing-card, .pricing-card.popular, .pricing-card:hover, .pricing-card.popular:hover {
+            transform: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
