@@ -8,9 +8,9 @@ execSync('npm install', { cwd: path.join(__dirname, 'frontend'), stdio: 'inherit
 console.log('⚡ Building frontend assets...');
 execSync('npm run build', { cwd: path.join(__dirname, 'frontend'), stdio: 'inherit' });
 
-console.log('🚚 Copying build output to root /dist folder...');
+console.log('🚚 Copying build output to root /public folder...');
 const src = path.join(__dirname, 'frontend/dist');
-const dest = path.join(__dirname, 'dist');
+const dest = path.join(__dirname, 'public');
 
 // Recursive helper to copy directory
 function copyDir(srcDir, destDir) {
@@ -32,4 +32,4 @@ function copyDir(srcDir, destDir) {
 }
 
 copyDir(src, dest);
-console.log('✅ Frontend build copied to root /dist successfully!');
+console.log('✅ Frontend build copied to root /public successfully!');
