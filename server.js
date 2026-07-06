@@ -57,4 +57,8 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Internal Server Error' });
 });
 
-app.listen(PORT, () => console.log(`🚀 MehSang Backend running on http://localhost:${PORT}`));
+if (require.main === module) {
+  app.listen(PORT, () => console.log(`🚀 MehSang Backend running on http://localhost:${PORT}`));
+}
+
+module.exports = app;
