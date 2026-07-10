@@ -37,13 +37,30 @@ export default function Services() {
         <p className="section-tagline" style={{ textAlign:'center' }}>Our Offerings</p>
         <h2 className="section-title center" style={{ textAlign:'center' }}>Mehndi Services We Offer</h2>
 
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(340px,1fr))', gap:30, marginTop:50 }}>
+        <div style={{ 
+          display: 'flex', 
+          gap: 30, 
+          marginTop: 50, 
+          overflowX: 'auto', 
+          padding: '10px 10px 25px 0', 
+          scrollSnapType: 'x mandatory',
+          scrollbarWidth: 'thin',
+          scrollbarColor: 'var(--gold) transparent'
+        }} className="services-horizontal-scroll">
           {services.map(s => (
             <div key={s.id} style={{
-              background:'#fff', borderRadius:16, overflow:'hidden',
-              boxShadow:'0 10px 30px var(--shadow)', border:'1px solid rgba(75,46,46,0.05)',
-              display:'flex', flexDirection:'column', transition:'all 0.4s cubic-bezier(0.25,1,0.5,1)',
+              flex: '0 0 350px',
+              background: '#fff', 
+              borderRadius: 16, 
+              overflow: 'hidden',
+              boxShadow: '0 10px 30px var(--shadow)', 
+              border: '1px solid rgba(75,46,46,0.05)',
+              display: 'flex', 
+              flexDirection: 'column', 
+              transition: 'all 0.4s cubic-bezier(0.25,1,0.5,1)',
+              scrollSnapAlign: 'start'
             }}
+              className="service-card"
               onMouseEnter={e => { e.currentTarget.style.transform='translateY(-8px)'; e.currentTarget.style.borderColor='var(--gold)'; }}
               onMouseLeave={e => { e.currentTarget.style.transform=''; e.currentTarget.style.borderColor='rgba(75,46,46,0.05)'; }}>
               <div style={{ position:'relative', height:240, overflow:'hidden' }}>
@@ -98,6 +115,23 @@ export default function Services() {
           </div>
         </div>
       )}
+      <style>{`
+        .services-horizontal-scroll::-webkit-scrollbar {
+          height: 6px;
+        }
+        .services-horizontal-scroll::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .services-horizontal-scroll::-webkit-scrollbar-thumb {
+          background-color: var(--gold);
+          border-radius: 999px;
+        }
+        @media(max-width: 480px) {
+          .service-card {
+            flex: 0 0 290px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
