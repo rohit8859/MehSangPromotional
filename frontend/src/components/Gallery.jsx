@@ -489,7 +489,7 @@ export default function Gallery({ limit }) {
           </div>
         ) : (
           /* Main Gallery Page Layout */
-          <div className="gallery-scroll">
+          <div className="masonry-grid">
             {filtered.map((item, index) => (
               <div key={item.src + index} className="masonry-item" onClick={() => setActivePhoto(item)} style={{ position: 'relative', borderRadius: 16, overflow: 'hidden', boxShadow: '0 8px 20px var(--shadow)', cursor: 'pointer' }}>
                 <img 
@@ -763,12 +763,12 @@ export default function Gallery({ limit }) {
         }
         .masonry-item {
           width: 100%;
-          aspect-ratio: 1;
           position: relative;
           border-radius: 16px;
           overflow: hidden;
           box-shadow: 0 8px 20px var(--shadow);
           cursor: pointer;
+          margin-bottom: 20px; /* spacing between rows in masonry column */
         }
         .masonry-item:hover img {
           transform: scale(1.05);
