@@ -40,17 +40,19 @@ export default function Navbar() {
         <div className="container" style={{ display:'flex', justifyContent:'space-between', alignItems:'center', height:'100%' }}>
           {/* Logo */}
           <Link to="/" style={{ display:'flex', alignItems:'center', gap:10 }}>
-            <div style={{
-              width:40, height:40, borderRadius:'50%',
-              background:'radial-gradient(circle, var(--gold) 0%, var(--brown) 100%)',
-              display:'flex', alignItems:'center', justifyContent:'center',
-              boxShadow:'0 4px 8px rgba(75,46,46,0.15)',
-            }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="3"/><path d="M12 16.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 1 1 0 9Z"/>
-                <path d="M12 2v4.5M12 17.5V22M4.93 4.93l3.18 3.18M15.89 15.89l3.18 3.18M2 12h4.5M17.5 12H22M19.07 4.93l-3.18 3.18M8.11 15.89l-3.18 3.18"/>
-              </svg>
-            </div>
+            <img 
+              src="/logo.png" 
+              alt="MehSang Logo" 
+              style={{ 
+                width: 40, 
+                height: 40, 
+                borderRadius: '50%', 
+                objectFit: 'contain', 
+                background: '#fff', 
+                padding: '2px', 
+                boxShadow: '0 4px 8px rgba(75,46,46,0.15)' 
+              }} 
+            />
             <span style={{ fontFamily:'Playfair Display,serif', fontSize:'1.8rem', fontWeight:800, color:'var(--brown)', letterSpacing:1 }}>MehSang</span>
           </Link>
 

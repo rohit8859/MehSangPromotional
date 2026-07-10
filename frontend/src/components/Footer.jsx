@@ -20,9 +20,19 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link to="/" style={{ display:'flex', alignItems:'center', gap:10, textDecoration:'none' }}>
-              <div style={{ width:40,height:40,borderRadius:'50%',background:'radial-gradient(circle,var(--gold),var(--brown))',display:'flex',alignItems:'center',justifyContent:'center' }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 16.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 1 1 0 9ZM12 2v4.5M12 17.5V22M4.93 4.93l3.18 3.18M15.89 15.89l3.18 3.18M2 12h4.5M17.5 12H22M19.07 4.93l-3.18 3.18M8.11 15.89l-3.18 3.18"/></svg>
-              </div>
+              <img 
+                src="/logo.png" 
+                alt="MehSang Logo" 
+                style={{ 
+                  width: 40, 
+                  height: 40, 
+                  borderRadius: '50%', 
+                  objectFit: 'contain', 
+                  background: '#fff', 
+                  padding: '2px',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+                }} 
+              />
               <span style={{ fontFamily:'Playfair Display,serif', fontSize:'1.8rem', fontWeight:800, color:'#fff', letterSpacing:1 }}>MehSang</span>
             </Link>
             <p style={{ color:'var(--beige)', marginTop:15, fontSize:'0.9rem', lineHeight:1.7 }}>
