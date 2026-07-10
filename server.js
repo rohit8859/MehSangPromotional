@@ -16,7 +16,12 @@ connectDB();
 // Middleware
 app.use(cors({
   origin(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (
+      !origin || 
+      allowedOrigins.includes(origin) || 
+      origin.endsWith('.vercel.app') || 
+      origin.includes('mehsang')
+    ) {
       return callback(null, true);
     }
     return callback(new Error(`CORS blocked origin: ${origin}`));
