@@ -469,9 +469,9 @@ export default function Gallery({ limit }) {
             <button className="reset-btn" onClick={() => { setSelectedCategory('all'); clearAllFilters(); }}>Reset Filters</button>
           </div>
         ) : limit ? (
-          /* Homepage Special Designs Teaser - Centered Vertical Scroll Viewport */
+          /* Homepage Special Designs Teaser - Horizontal Scroll Viewport */
           <div className="special-designs-wrapper">
-            <div className="special-designs-scroll-container">
+            <div className="special-designs-horizontal-container">
               {filtered.map((item, index) => (
                 <div key={item.src + index} className="special-design-card" onClick={() => setActivePhoto(item)}>
                   <img 
@@ -786,66 +786,58 @@ export default function Gallery({ limit }) {
 
         /* Homepage Special Designs Teaser Styles */
         .special-designs-wrapper {
-          display: flex;
-          justify-content: center;
-          align-items: center;
           width: 100%;
           margin-top: 20px;
         }
-        .special-designs-scroll-container {
+        .special-designs-horizontal-container {
           display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 24px;
+          gap: 20px;
           width: 100%;
-          max-width: 480px;
-          height: 520px;
-          overflow-y: auto;
-          padding: 20px 16px;
-          background: rgba(245, 235, 221, 0.15); /* var(--beige) with low opacity */
-          border: 1.5px solid var(--beige);
-          border-radius: 24px;
-          box-shadow: inset 0 4px 10px rgba(75, 46, 46, 0.03), 0 10px 30px rgba(75, 46, 46, 0.04);
+          overflow-x: auto;
+          padding: 20px 10px;
+          scroll-snap-type: x mandatory;
           scrollbar-width: thin;
           scrollbar-color: var(--gold) transparent;
         }
-        .special-designs-scroll-container::-webkit-scrollbar {
-          width: 6px;
+        .special-designs-horizontal-container::-webkit-scrollbar {
+          height: 6px;
         }
-        .special-designs-scroll-container::-webkit-scrollbar-track {
+        .special-designs-horizontal-container::-webkit-scrollbar-track {
           background: transparent;
         }
-        .special-designs-scroll-container::-webkit-scrollbar-thumb {
+        .special-designs-horizontal-container::-webkit-scrollbar-thumb {
           background-color: var(--gold);
           border-radius: 999px;
         }
         .special-design-card {
-          width: 100%;
+          flex: 0 0 280px; /* Uniform width on desktop */
+          aspect-ratio: 1; /* Balanced square card layout */
+          scroll-snap-align: start;
           position: relative;
           border-radius: 16px;
           overflow: hidden;
           box-shadow: 0 8px 25px rgba(75, 46, 46, 0.1);
           cursor: pointer;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
-          flex-shrink: 0;
         }
         .special-design-card:hover {
-          transform: translateY(-4px);
+          transform: translateY(-6px);
           box-shadow: 0 12px 30px rgba(75, 46, 46, 0.15);
         }
         .special-design-card img {
           width: 100%;
-          height: auto;
+          height: 100%;
+          object-fit: cover; /* Crop to fit cleanly */
           display: block;
           transition: transform 0.4s ease;
         }
         .special-design-card:hover img {
-          transform: scale(1.03);
+          transform: scale(1.05);
         }
         .special-design-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(75, 46, 46, 0.8), rgba(75, 46, 46, 0.15));
+          background: linear-gradient(to top, rgba(75, 46, 46, 0.85), rgba(75, 46, 46, 0.15));
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
@@ -862,6 +854,12 @@ export default function Gallery({ limit }) {
           text-transform: uppercase;
           font-weight: 600;
           letter-spacing: 1px;
+        }
+
+        @media(max-width: 480px) {
+          .special-design-card {
+            flex: 0 0 220px; /* Smaller card size on mobile devices */
+          }
         }
 
         /* Lightbox Styles */
