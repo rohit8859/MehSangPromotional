@@ -18,16 +18,21 @@ const FemaleAvatar = () => (
     display: 'flex', alignItems: 'center', justifyContent: 'center',
     margin: '0 auto 15px', overflow: 'hidden'
   }}>
-    <svg viewBox="0 0 100 100" style={{ width: '80%', height: '80%' }}>
-      {/* Hair outline in back */}
-      <path d="M25,50 C25,25 75,25 75,50 C75,68 70,72 70,85 L30,85 C30,72 25,68 25,50 Z" fill="var(--brown)" opacity="0.85" />
+    <svg viewBox="0 0 100 100" style={{ width: '85%', height: '85%' }}>
       {/* Head & Neck */}
-      <path d="M50,68 L50,75 L46,75 L46,68 Z" fill="var(--beige-dark)" />
-      <circle cx="50" cy="45" r="18" fill="var(--beige-dark)" />
-      {/* Hair front/sides */}
-      <path d="M32,45 C32,28 68,28 68,45 C68,52 64,56 64,65 C60,60 55,62 50,58 C45,62 40,60 36,65 C36,56 32,52 32,45 Z" fill="var(--brown)" />
+      <path d="M50,70 L50,78 L44,78 L44,70 Z" fill="var(--beige-dark)" />
+      <circle cx="50" cy="46" r="19" fill="var(--beige-dark)" />
+      {/* Elegant Hair (longer and flowing) */}
+      <path d="M31,45 C31,25 69,25 69,45 C69,58 73,62 73,85 C68,82 65,85 60,82 C55,85 50,82 45,85 C40,82 35,85 31,80 C31,62 31,58 31,45 Z" fill="var(--brown)" />
+      <path d="M37,42 C40,32 60,32 63,42 C65,48 61,52 61,62 C57,58 53,60 50,56 C47,60 43,58 39,62 C39,52 35,48 37,42 Z" fill="var(--brown-light)" />
       {/* Shoulders */}
-      <path d="M22,90 C22,76 34,75 50,75 C66,75 78,76 78,90 Z" fill="var(--brown-light)" />
+      <path d="M20,92 C20,78 32,77 50,77 C68,77 80,78 80,92 Z" fill="var(--brown)" />
+      {/* Small floral detail in hair (adds a premium, bridal touch!) */}
+      <circle cx="63" cy="35" r="4" fill="var(--gold)" />
+      <circle cx="66" cy="38" r="3" fill="var(--ivory)" />
+      <circle cx="60" cy="38" r="3" fill="var(--ivory)" />
+      <circle cx="63" cy="31" r="3" fill="var(--ivory)" />
+      <circle cx="63" cy="39" r="3" fill="var(--ivory)" />
     </svg>
   </div>
 );
