@@ -24,22 +24,53 @@ export default function Process() {
                 fontFamily:'Playfair Display,serif', fontSize:'1.5rem', fontWeight:700,
                 color:'var(--brown)', marginBottom:20, transition:'all 0.4s', cursor:'default',
               }}
+                className="step-circle"
                 onMouseEnter={e => { e.currentTarget.style.borderColor='var(--gold)'; e.currentTarget.style.background='var(--gold)'; e.currentTarget.style.color='#fff'; e.currentTarget.style.boxShadow='0 4px 15px rgba(212,175,55,0.3)'; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor='var(--beige-dark)'; e.currentTarget.style.background='var(--ivory)'; e.currentTarget.style.color='var(--brown)'; e.currentTarget.style.boxShadow=''; }}>
                 {s.n}
               </div>
-              <h3 style={{ fontFamily:'Playfair Display,serif', fontSize:'1rem', color:'var(--brown)', marginBottom:8 }}>{s.title}</h3>
-              <p style={{ fontSize:'0.8rem', color:'var(--text-light)' }}>{s.desc}</p>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} className="step-text-container">
+                <h3 style={{ fontFamily:'Playfair Display,serif', fontSize:'1rem', color:'var(--brown)', marginBottom:8 }} className="step-title">{s.title}</h3>
+                <p style={{ fontSize:'0.8rem', color:'var(--text-light)' }} className="step-desc">{s.desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </div>
       <style>{`
+        .timeline-line {
+          position: relative;
+        }
+        .timeline-line::after {
+          content: '';
+          position: absolute;
+          right: -8px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 0;
+          height: 0;
+          border-top: 6px solid transparent;
+          border-bottom: 6px solid transparent;
+          border-left: 8px solid var(--beige-dark);
+        }
         @media(max-width:768px){
-          .timeline-resp { flex-direction:column !important; gap:30px !important; alignItems:flex-start; padding-left:30px; }
-          .timeline-line { top:0 !important; bottom:0 !important; left:30px !important; width:3px !important; right:auto !important; height:100% !important; }
-          .step-resp { flex-direction:row !important; width:100% !important; text-align:left !important; gap:20px !important; align-items:center !important; }
-          .step-resp > div:first-child { margin-bottom:0 !important; flex-shrink:0; }
+          .timeline-resp { flex-direction:column !important; gap:40px !important; align-items:flex-start !important; padding-left:20px; }
+          .timeline-line { top:0 !important; bottom:0 !important; left:50px !important; width:3px !important; right:auto !important; height:100% !important; }
+          .timeline-line::after {
+            right: auto !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            bottom: -8px !important;
+            top: auto !important;
+            border-left: 6px solid transparent !important;
+            border-right: 6px solid transparent !important;
+            border-top: 8px solid var(--beige-dark) !important;
+          }
+          .step-resp { flex-direction:row !important; width:100% !important; text-align:left !important; gap:24px !important; align-items:flex-start !important; }
+          .step-resp > .step-circle { margin-bottom:0 !important; flex-shrink:0; z-index: 5; }
+          .step-text-container { align-items: flex-start !important; text-align: left !important; }
+          .step-title { margin-bottom: 4px !important; font-size: 1.1rem !important; }
+          .step-desc { font-size: 0.85rem !important; line-height: 1.4 !important; }
         }
       `}</style>
     </section>
