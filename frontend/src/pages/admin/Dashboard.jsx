@@ -37,6 +37,8 @@ export default function AdminDashboard() {
   const [emailLogs, setEmailLogs] = useState([]);
   const [galleryItems, setGalleryItems] = useState([]);
   const [tab, setTab] = useState('bookings');
+  const [logSearch, setLogSearch] = useState('');
+  const [logTypeFilter, setLogTypeFilter] = useState('All');
   
   // Filtering & loading states
   const [filter, setFilter] = useState('');
@@ -570,36 +572,135 @@ export default function AdminDashboard() {
         )}
 
         {/* Email Logs Tab */}
-        {tab === 'emails' && (
-          <div className="space-y-3">
-            {emailLogs.length === 0 ? (
-              <div className="bg-white rounded-2xl p-16 text-center border border-cream-200">
-                <Mail size={40} className="text-cream-400 mx-auto mb-4" />
-                <p className="font-body text-gray-400">No email logs yet.</p>
-              </div>
-            ) : emailLogs.map(e => (
-              <div key={e._id} className="bg-white rounded-2xl p-5 shadow-sm border border-cream-200">
-                <div className="flex items-start justify-between gap-4">
+        {tab === 'emails' && (() => {
+          // Filter email logs based on search query and type filter
+          const filteredLogs = emailLogs.filter(e => {
+            const matchesSearch = 
+              e.recipient.toLowerCase().includes(logSearch.toLowerCase()) ||
+              e.subject.toLowerCase().includes(logSearch.toLowerCase()) ||
+              (e.body && e.body.toLowerCase().includes(logSearch.toLowerCase()));
+            const matchesType = logTypeFilter === 'All' || e.type === logTypeFilter;
+            return matchesSearch && matchesType;
+          });
+
+          // Metrics
+          const totalLogs = emailLogs.length;
+          const artistAlerts = emailLogs.filter(e => e.type === 'Artist Notification').length;
+          const clientAlerts = emailLogs.filter(e => e.type === 'Client Confirmation').length;
+
+          return (
+            <div className="space-y-6">
+              {/* Header metrics card */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-white rounded-2xl p-5 shadow-sm border border-cream-200 flex items-center justify-between">
                   <div>
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
-                        e.type === 'Artist Notification' ? 'bg-maroon-100 text-maroon-700'
-                          : e.type === 'Client Confirmation' ? 'bg-green-100 text-green-700'
-                          : 'bg-blue-100 text-blue-700'
-                      }`}>{e.type}</span>
-                      <span className="font-body text-xs text-gray-400">→ {e.recipient}</span>
-                    </div>
-                    <p className="font-body font-semibold text-sm text-gray-700">{e.subject}</p>
-                    <p className="font-body text-xs text-gray-400 mt-1 line-clamp-2">{e.body}</p>
+                    <p className="font-body text-xs text-gray-400 font-medium uppercase tracking-wider">Total Sent</p>
+                    <p className="font-title text-2xl font-bold text-gray-700 mt-1">{totalLogs}</p>
                   </div>
-                  <p className="font-body text-xs text-gray-400 whitespace-nowrap">
-                    {new Date(e.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
-                  </p>
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                    <Mail size={20} />
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl p-5 shadow-sm border border-cream-200 flex items-center justify-between">
+                  <div>
+                    <p className="font-body text-xs text-gray-400 font-medium uppercase tracking-wider">Client Confirmations</p>
+                    <p className="font-title text-2xl font-bold text-gray-700 mt-1">{clientAlerts}</p>
+                  </div>
+                  <div className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center text-green-600">
+                    <CheckCircle size={20} />
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl p-5 shadow-sm border border-cream-200 flex items-center justify-between">
+                  <div>
+                    <p className="font-body text-xs text-gray-400 font-medium uppercase tracking-wider">Artist Alerts</p>
+                    <p className="font-title text-2xl font-bold text-gray-700 mt-1">{artistAlerts}</p>
+                  </div>
+                  <div className="w-10 h-10 rounded-xl bg-maroon-50 flex items-center justify-center text-maroon-600">
+                    <Calendar size={20} />
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+
+              {/* Filters toolbar */}
+              <div className="bg-white rounded-2xl p-4 shadow-sm border border-cream-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                {/* Search */}
+                <div className="relative flex-1">
+                  <input
+                    type="text"
+                    placeholder="Search logs by recipient or subject..."
+                    value={logSearch}
+                    onChange={(e) => setLogSearch(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-cream-300 rounded-xl font-body text-sm focus:outline-none focus:border-gold transition-colors"
+                  />
+                  <div className="absolute left-3 top-2.5 text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Filter pills */}
+                <div className="flex gap-2 overflow-x-auto pb-1 md:pb-0">
+                  {['All', 'Client Confirmation', 'Artist Notification'].map(type => (
+                    <button
+                      key={type}
+                      onClick={() => setLogTypeFilter(type)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
+                        logTypeFilter === type 
+                          ? 'bg-gold text-white shadow-sm shadow-gold-200' 
+                          : 'bg-cream-100 text-gray-600 hover:bg-cream-200'
+                      }`}
+                    >
+                      {type === 'All' ? 'All Logs' : type}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Logs output */}
+              <div className="space-y-3">
+                {filteredLogs.length === 0 ? (
+                  <div className="bg-white rounded-2xl p-16 text-center border border-cream-200">
+                    <Mail size={40} className="text-cream-400 mx-auto mb-4 animate-bounce" />
+                    <p className="font-body text-gray-400">No matching email logs found.</p>
+                  </div>
+                ) : filteredLogs.map(e => (
+                  <div 
+                    key={e._id} 
+                    className="bg-white rounded-2xl p-5 shadow-sm border-l-4 border-y border-r border-cream-200 transition-all hover:shadow-md"
+                    style={{ 
+                      borderLeftColor: e.type === 'Artist Notification' ? '#ab1a45' 
+                        : e.type === 'Client Confirmation' ? '#556B2F' 
+                        : '#AA8B24' 
+                    }}
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                            e.type === 'Artist Notification' ? 'bg-maroon-100 text-maroon-700'
+                              : e.type === 'Client Confirmation' ? 'bg-green-100 text-green-700'
+                              : 'bg-blue-100 text-blue-700'
+                          }`}>{e.type}</span>
+                          <span className="font-body text-xs text-gray-400 font-medium">Recipient: {e.recipient}</span>
+                        </div>
+                        <p className="font-body font-semibold text-sm text-gray-700">{e.subject}</p>
+                        <div className="bg-cream-50 p-3 rounded-lg border border-cream-100 mt-2">
+                          <p className="font-body text-xs text-gray-500 whitespace-pre-wrap leading-relaxed">{e.body}</p>
+                        </div>
+                      </div>
+                      <p className="font-body text-[10px] font-bold text-gray-400 whitespace-nowrap uppercase tracking-wider">
+                        {new Date(e.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
       </div>
     </div>
   );
