@@ -1,0 +1,59 @@
+# MehSang Studio - Robots.txt
+# Controls search engine crawling behavior
+
+# Default rules for all bots
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login/
+Crawl-delay: 1
+
+# Google Bot - Specific rules
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Bing Bot
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Apple Bot (Siri)
+User-agent: Applebot
+Allow: /
+Disallow: /admin/
+
+# AI Search Bots - Allow crawling for indexing
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Social Media Bots
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Crawl delay
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://meh-sang-promotional-psi.vercel.app/sitemap.xml
