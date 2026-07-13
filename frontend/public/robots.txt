@@ -1,4 +1,61 @@
+# General Search Engine Crawlers
 User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+
+# Google Search
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+
+# AI & LLM Crawlers (Allowing indexing/training for MehSang brand visibility)
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+
+User-agent: FacebookBot
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+
+User-agent: PerplexityBot
 Allow: /
 Disallow: /admin
 Disallow: /admin/*
