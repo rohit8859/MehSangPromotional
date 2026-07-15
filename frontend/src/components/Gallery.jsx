@@ -338,7 +338,8 @@ export default function Gallery({ limit }) {
           {limit ? 'Our Special Designs' : 'Stunning Design Gallery'}
         </h2>
 
-        {/* Primary Category Selector & Advanced Filters Toggle */}
+        {/* Primary Category Selector & Advanced Filters Toggle (Hidden as requested) */}
+        {/*
         {!limit && (
           <div className="gallery-filter-controls">
             <div className="categories-row">
@@ -363,8 +364,10 @@ export default function Gallery({ limit }) {
             )}
           </div>
         )}
+        */}
 
-        {/* Slide-Down Advanced Filters Drawer */}
+        {/* Slide-Down Advanced Filters Drawer (Hidden as requested) */}
+        {/*
         {!limit && hasAdvancedOptions && showAdvanced && (
           <div className="advanced-filters-panel">
             {occasions.length > 0 && (
@@ -418,8 +421,10 @@ export default function Gallery({ limit }) {
             )}
           </div>
         )}
+        */}
 
-        {/* Active Filter Tags */}
+        {/* Active Filter Tags (Hidden as requested) */}
+        {/*
         {!limit && hasActiveFilters && (
           <div className="active-tags-row">
             <span className="tags-label">Active Filters:</span>
@@ -456,6 +461,7 @@ export default function Gallery({ limit }) {
             <button className="clear-all-btn" onClick={clearAllFilters}>Clear All</button>
           </div>
         )}
+        */}
 
         {/* Loader or Gallery Scroll */}
         {loading ? (
